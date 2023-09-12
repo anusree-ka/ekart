@@ -1,0 +1,80 @@
+<nav
+  class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top"
+  style="background-color: rgb(195, 240, 127)"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" style="font-weight: bolder" routerLink="home">
+      <img
+        src="https://icon-library.com/images/cart-icon-transparent/cart-icon-transparent-18.jpg"
+        alt=""
+        class="img-responsive"
+        style="max-width: 50px"
+      />Ekart</a
+    >
+    <form class="d-flex" role="search" style="width: 50%">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        (input)="searchProducts($event)"
+        #searchParam
+      />
+      <!-- <button class="btn btn-outline-dark" type="submit">Search</button> -->
+    </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item dropdown" *ngIf="isLoggedIn">
+        <a
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://icon-library.com/images/contact-icon-png/contact-icon-png-5.jpg"
+            alt=""
+            class="img-responsive"
+            style="max-width: 30px"
+          />
+          Hello! {{ username }}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="profile">My Account</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="orders">
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/check-out-add-on-colored/48/JD-02-512.png"
+            alt=""
+            class="img-responsive"
+            style="max-width: 30px"
+          />Orders</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="cart">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/222/222186.png"
+            alt=""
+            class="img-responsive"
+            style="max-width: 25px"
+          />
+          Cart
+          <span
+            class="top-0 start-100 translate-middle badge rounded-pill bg-dark"
+            style="margin-left: 10px"
+          >
+            {{ this.noOfItemsInCart }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<app-toast></app-toast>
+<router-outlet></router-outlet>

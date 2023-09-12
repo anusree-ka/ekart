@@ -1,0 +1,7 @@
+{
+  "/google/*": {
+    "target": "https://accounts.google.com/gsi",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

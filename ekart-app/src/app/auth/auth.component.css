@@ -1,0 +1,23 @@
+.form-control::placeholder {
+  font-size: small;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: rgb(226, 56, 56);
+}
+
+h6 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid gray;
+  line-height: 0.1em;
+  margin: 50px 0 20px;
+}
+
+h6 span {
+  background: #fff;
+  padding: 0 10px;
+  color: gray;
+  font-style: italic;
+}

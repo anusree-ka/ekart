@@ -1,0 +1,11 @@
+<div
+  class="toast-container"
+  style="position: fixed; bottom: 100px; right: 50px"
+  *ngIf="toast.showToast$ | async"
+>
+  <div class="toast fade show">
+    <div class="toast-body" [class]="toast.messageType$ | async">
+      {{ toast.toastMessage$ | async }}
+    </div>
+  </div>
+</div>

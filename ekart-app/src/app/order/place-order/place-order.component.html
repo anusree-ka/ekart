@@ -1,0 +1,208 @@
+<div
+  class="container"
+  style="margin-top: 100px; margin-bottom: 100px; width: 50%"
+>
+  <div class="accordion accordion-flush" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          style="font-weight: bold; font-size: large; background-color: khaki"
+        >
+          Deliver to address
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse show"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <label>
+            <input type="radio" id="address" checked />
+            <span
+              style="
+                display: inline-flex;
+                flex-direction: column;
+                margin-left: 10px;
+              "
+            >
+              {{ userDetails ? userDetails.username : "" }}
+              <br />
+              {{ userDetails ? userDetails.address : "" }}
+              <br />
+              {{ userDetails ? userDetails.contactNo : "" }}
+            </span>
+          </label>
+          <br />
+          <br />
+          <br />
+          <div>
+            <button
+              class="btn rounded-pill btn-sm"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+              style="background-color: khaki"
+            >
+              Use this address
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+          style="font-weight: bold; font-size: large; background-color: khaki"
+        >
+          Payment Method
+        </button>
+      </h2>
+      <div
+        id="collapseTwo"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <form [formGroup]="paymentSelectionForm">
+            <div *ngFor="let method of payMentMethods">
+              <input
+                type="radio"
+                name="payment"
+                id="payment"
+                [value]="method"
+                formControlName="payment"
+              />
+              <span style="margin-left: 10px">{{ method }}</span>
+            </div>
+          </form>
+
+          <br />
+          <br />
+          <br />
+          <div>
+            <button
+              class="btn rounded-pill btn-sm"
+              style="background-color: khaki"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+              (click)="
+                selectedPaymentMethod = paymentSelectionForm.value.payment
+              "
+            >
+              Use this payment method
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+          style="font-weight: bold; font-size: large; background-color: khaki"
+        >
+          Items and Delivery
+        </button>
+      </h2>
+      <div
+        id="collapseThree"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <div
+            class="card"
+            *ngFor="let item of itemsToOrder"
+            style="margin-top: 20px"
+          >
+            <div class="card-header">
+              <b
+                >Delivery Date:
+                {{ item.product.expectedDelivery | date : "dd MMM YYYY" }}</b
+              >
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <img
+                    [src]="item.product.productImageUrl"
+                    alt=""
+                    style="max-width: 150px"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <span
+                    ><b>{{ item.product.productName }}</b></span
+                  >
+                  <br />
+                  <span
+                    ><b class="text-success"
+                      >${{ item.product.productPrice }}.00</b
+                    ></span
+                  >
+                  <div style="font-size: small">
+                    Quantity:
+                    <input
+                      type="number"
+                      id="quantity"
+                      name="quantity"
+                      class="form-control-sm"
+                      style="width: 50px; font-size: small"
+                      [value]="item.quantity"
+                      placeholder="Quantity"
+                      min="1"
+                      #quantity
+                      (change)="updateQuantity($event, item.itemId)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 20px">
+            <div class="card-body">
+              <b class="text-success" style="font-size: large">
+                Order Total : $ {{ orderTotal }}.00
+              </b>
+              <div style="margin-top: 30px">
+                <button
+                  class="btn rounded-pill btn-sm"
+                  style="background-color: khaki"
+                  (click)="placeOrder()"
+                >
+                  Place your order
+                </button>
+                <button
+                  class="btn rounded-pill btn-sm btn-danger"
+                  style="margin-left: 10px"
+                  (click)="cancel()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

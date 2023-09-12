@@ -1,0 +1,88 @@
+<div class="container" style="margin-top: 100px; margin-bottom: 100px">
+  <h1>{{ carts.length > 0 ? "Shopping cart" : "Your cart is empty" }}</h1>
+  <div *ngIf="carts.length == 0">
+    <a class="link-primary" (click)="goToProducts()" role="button">
+      <img src="assets/images/arrow.png" alt="" style="max-width: 30px" />
+      Go to products
+    </a>
+  </div>
+  <div style="margin-top: 50px">
+    <div class="row row-cols-sm-1 row-cols-md-2 g-4" *ngIf="carts.length > 0">
+      <div class="col">
+        <ul class="list-group" *ngFor="let cart of carts">
+          <li class="list-group-item">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+              <div class="col">
+                <img
+                  [src]="cart.product.productImageUrl"
+                  alt=""
+                  style="max-width: 150px"
+                />
+              </div>
+              <div class="col">
+                <p
+                  style="
+                    font-size: large;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ cart.product.productName }}
+                  <br />
+                  <b
+                    >${{ cart.product.productPrice }}
+                    <span style="font-size: small; font-weight: lighter">{{
+                      cart.product.stock > 0 ? "In stock" : "Out of stock"
+                    }}</span></b
+                  >
+                </p>
+                <br />
+                <div style="font-size: small">
+                  Quantity:
+                  <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    class="form-control-sm"
+                    style="width: 50px; font-size: small"
+                    [value]="cart.quantity"
+                    placeholder="Quantity"
+                    min="1"
+                    #quantity
+                    (change)="updateQuantity($event, cart.cartId)"
+                  />
+                </div>
+                <a
+                  (click)="deleteItemFromCart(cart.cartId)"
+                  role="button"
+                  style="font-size: small"
+                  class="text-danger"
+                  >Delete</a
+                >
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 15rem; height: 10rem">
+          <div class="card-body">
+            <p>
+              Subtotal {{ carts.length }} items:
+              <b>$ {{ this.subtotal }}</b>
+            </p>
+            <button
+              class="btn rounded-pill btn-success w-100"
+              (click)="order()"
+              style="margin-top: 30px"
+            >
+              Proceed to Buy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

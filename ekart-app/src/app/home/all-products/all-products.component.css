@@ -1,0 +1,20 @@
+.hide {
+  display: none;
+}
+
+.card {
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+  border-radius: 0;
+  border: 0;
+  transition: transform 0.2s ease;
+  height: 100%;
+  width: 20rem;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card:hover .hide {
+  display: block;
+}
