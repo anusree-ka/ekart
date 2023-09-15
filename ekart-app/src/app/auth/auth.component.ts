@@ -14,7 +14,7 @@ import { User } from './signup-request.model';
 })
 export class AuthComponent implements AfterViewInit, OnInit {
   signupForm: FormGroup;
-  isLogin = false;
+  isLogin = true;
 
   constructor(
     private router: Router,
@@ -55,6 +55,7 @@ export class AuthComponent implements AfterViewInit, OnInit {
     );
 
     this.authService.signup(user);
+    this.authorize();
   }
 
   // onLogin() {

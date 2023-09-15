@@ -11,7 +11,34 @@
       </p>
       <span style="margin-top: 100px"> Join Us </span>
 
-      <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="w-50">
+      <div *ngIf="isLogin">
+        <div style="margin-top: 30px">
+          <button
+            class="btn btn-success rounded-pill btn-sm w-50"
+            (click)="isLogin = false"
+          >
+            Signup
+          </button>
+        </div>
+        <div style="margin-top: 10px; margin-left: 24%">
+          <span>Or</span>
+        </div>
+        <div style="margin-top: 10px">
+          <button
+            class="btn btn-success rounded-pill btn-sm w-50"
+            (click)="authorize()"
+          >
+            Signin
+          </button>
+        </div>
+      </div>
+
+      <form
+        [formGroup]="signupForm"
+        (ngSubmit)="onSignup()"
+        class="w-50"
+        *ngIf="!isLogin"
+      >
         <div class="input-group-sm" style="margin-top: 50px">
           <input
             type="email"
@@ -57,20 +84,8 @@
           >
             Signup
           </button>
-
-          <div style="margin-top: 20px" class="d-flex justify-content-center">
-            <span>Or</span>
-          </div>
         </div>
       </form>
-      <div style="margin-top: 20px">
-        <button
-          class="btn btn-success rounded-pill btn-sm w-50"
-          (click)="authorize()"
-        >
-          Login
-        </button>
-      </div>
 
       <!-- <div
         class="g_id_signin"
